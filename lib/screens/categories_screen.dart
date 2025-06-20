@@ -5,8 +5,12 @@ import 'package:flutter/material.dart';
 import '../data/dummy_data.dart';
 
 class CategoriesScreen extends StatelessWidget {
-  const CategoriesScreen({super.key, required this.onTaggleFavorite});
-  final void Function(Meal meal) onTaggleFavorite;
+ const CategoriesScreen({super.key,
+ // required this.onTaggleFavorite,
+ required this.availableMeals
+ });
+ // final void Function(Meal meal) onTaggleFavorite;
+   final List<Meal> availableMeals;
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +26,8 @@ class CategoriesScreen extends StatelessWidget {
           CategoryGridItem(
             category: category,
          meals: [],
-            onTaggleFavorite: onTaggleFavorite, 
+           // onTaggleFavorite: onTaggleFavorite, 
+            availableMeals:availableMeals
           ),
       ],
     );

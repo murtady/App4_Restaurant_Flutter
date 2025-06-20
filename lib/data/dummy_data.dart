@@ -311,7 +311,7 @@ final  List<Meal> dummyMeals = [
     affordability: Affordability.pricey,
     isGlutenFree: false,
     isLactoseFree: false,
-    isVegan: false,
+    isVegan:true,
     isVegetarian: false,
     isVeterarian: false,
   ),

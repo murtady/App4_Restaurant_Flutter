@@ -1,9 +1,9 @@
 // ignore_for_file: deprecated_member_use, duplicate_ignore
 
-import 'package:app4/data/dummy_data.dart';
-import 'package:app4/models/category.dart';
-import 'package:app4/models/meal.dart';
-import 'package:app4/screens/meals_screen.dart';
+// import 'package:app4/data/dummy_data.dart';
+import '../models/category.dart';
+import '../models/meal.dart';
+import '../screens/meals_screen.dart';
 import 'package:flutter/material.dart';
 
 class CategoryGridItem extends StatelessWidget {
@@ -11,21 +11,23 @@ class CategoryGridItem extends StatelessWidget {
     super.key,
     required this.category,
     required this.meals,
-    required this.onTaggleFavorite,
+   // required this.onTaggleFavorite, 
+     required this.availableMeals,
   });
   //استقبال
   final Category category;
   final List<Meal> meals;
-  final void Function(Meal meal) onTaggleFavorite;
+  //final void Function(Meal meal) onTaggleFavorite;
+  final List<Meal>availableMeals;
   @override
   Widget build(BuildContext context) {
     return InkWell(
       // ignore: unused_local_variable
       onTap: () {
         // ignore: unused_local_variable
-        final filteredMeal =
+        final List<Meal> filteredMeal =
             //البحث عن التطابق
-            dummyMeals
+            availableMeals
                 .where((meal) => meal.categories.contains(category.id))
                 .toList();
         Navigator.of(context).push(
@@ -33,7 +35,7 @@ class CategoryGridItem extends StatelessWidget {
             builder:
                 (ctx) => MealsScreen(
                   meals: filteredMeal,
-                  onTaggleFavorite: onTaggleFavorite,
+                  //onTaggleFavorite: onTaggleFavorite,
                 ),
           ),
         );

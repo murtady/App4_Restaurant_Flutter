@@ -1,24 +1,44 @@
 import 'package:app4/models/meal.dart';
+import 'package:app4/provider/favortes_provider.dart';
+import 'package:app4/provider/filters_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class MealDetailScreen extends StatelessWidget {
+class MealDetailScreen extends ConsumerWidget {
   const MealDetailScreen({
     super.key,
     required this.meal,
-    required this.onTaggleFavorite,
+    // required this.onTaggleFavorite,
   });
   final Meal meal;
-  final void Function(Meal meal) onTaggleFavorite;
+  //final void Function(Meal meal) onTaggleFavorite;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
       appBar: AppBar(
         title: Text(meal.title),
         actions: [
           IconButton(
-            onPressed: () => onTaggleFavorite(meal),
-            icon: Icon(Icons.star),
+            icon: const Icon(Icons.star),
+            onPressed: () {
+              // نقلب حالة المفضل (يُعيد true إذا ضُيف، false إذا نُزع)
+              final wasAdded = ref
+                  .read(favoritesMealsProvider.notifier)
+                  .toggleMealFavoriteStatus(meal);
+
+              // نزيل أي SnackBars مفتوحة ثم نظهر الرسالة الجديدة
+              ScaffoldMessenger.of(context).clearSnackBars();
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                  content: Text(
+                    wasAdded
+                        ? 'Meal added to favorites.'
+                        : 'Meal removed from favorites.',
+                  ),
+                ),
+              );
+            },
           ),
         ],
       ),

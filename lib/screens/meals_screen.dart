@@ -8,11 +8,12 @@ class MealsScreen extends StatelessWidget {
     super.key,
    this.title,
       required this.meals, 
-      required this.onTaggleFavorite});
+     // required this.onTaggleFavorite
+      });
   final String? title;
   final List<Meal> meals;
 
-  final void Function(Meal meal) onTaggleFavorite;
+ // final void Function(Meal meal) onTaggleFavorite;
   @override
   Widget build(BuildContext context) {
     return title==null?content(context): Scaffold(
@@ -33,7 +34,7 @@ class MealsScreen extends StatelessWidget {
                             builder:
                                 (ctx) => MealDetailScreen(
                                   meal: meal,
-                                  onTaggleFavorite:   onTaggleFavorite,
+                               //   onTaggleFavorite:   onTaggleFavorite,
                                 ),
                           ),
                         );
